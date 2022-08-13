@@ -11,18 +11,9 @@ PKG_URL="https://xkbcommon.org/download/${PKG_NAME}-${PKG_VERSION}.tar.xz"
 PKG_DEPENDS_TARGET="toolchain xkeyboard-config libxml2"
 PKG_LONGDESC="xkbcommon is a library to handle keyboard descriptions."
 
-PKG_MESON_OPTS_TARGET="-Denable-docs=false"
-
-if [ "${DISPLAYSERVER}" = "x11" ]; then
-  PKG_MESON_OPTS_TARGET+=" -Denable-x11=true \
-                           -Denable-wayland=false"
-elif [ "${DISPLAYSERVER}" = "wl" ]; then
-  PKG_MESON_OPTS_TARGET+=" -Denable-x11=false \
-                           -Denable-wayland=true"
-else
-  PKG_MESON_OPTS_TARGET+=" -Denable-x11=false \
-                           -Denable-wayland=false"
-fi
+PKG_MESON_OPTS_TARGET=-Denable-docs=false \
+			-Denable-x11=false \
+                        -Denable-wayland=false
 
 pre_configure_target() {
   if [ "${DISPLAYSERVER}" = "x11" ]; then

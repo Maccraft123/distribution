@@ -18,10 +18,7 @@ configure_package() {
     PKG_DEPENDS_TARGET+=" vulkan-loader:host"
   fi
 
-  # Displayserver Support
-  if [ "${DISPLAYSERVER}" = "x11" ]; then
-    PKG_DEPENDS_TARGET+=" libxcb libX11"
-  elif [ "${DISPLAYSERVER}" = "wl" ]; then
+  if [ "${DISPLAYSERVER}" = "wl" -o "${DISPLAYSERVER}" = "weston" ]; then 
     PKG_DEPENDS_TARGET+=" wayland"
   fi
 }
@@ -49,11 +46,7 @@ pre_configure_target() {
     PKG_CMAKE_OPTS_TARGET+=" -DUSE_GAS=OFF"
   fi
 
-  if [ "${DISPLAYSERVER}" = "x11" ]; then
-    PKG_CMAKE_OPTS_TARGET+=" -DBUILD_WSI_XCB_SUPPORT=ON \
-                             -DBUILD_WSI_XLIB_SUPPORT=ON \
-                             -DBUILD_WSI_WAYLAND_SUPPORT=OFF"
-  elif [ "${DISPLAYSERVER}" = "wl" ]; then
+  if [ "${DISPLAYSERVER}" = "wl" ]; then
     PKG_CMAKE_OPTS_TARGET+=" -DBUILD_WSI_XCB_SUPPORT=OFF \
                              -DBUILD_WSI_XLIB_SUPPORT=OFF \
                              -DBUILD_WSI_WAYLAND_SUPPORT=ON"

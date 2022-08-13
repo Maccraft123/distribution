@@ -52,13 +52,6 @@ fi
 
 MAKE="$TOOLCHAIN/bin/make"
 
-XORG_PATH_DRI=/usr/lib/dri
-XORG_PATH_XKB=/usr/share/X11/xkb
-XORG_PATH_XKB_OUTPUT=/var/lib/xkb
-XORG_PATH_RGB=/usr/lib/X11/rgb
-XORG_PATH_MODULES=/usr/lib/xorg/modules
-XORG_PATH_DRIVERS=/usr/lib/xorg/modules/drivers
-
 . config/optimize
 
 # use ARM toolchain on 64/32 split builds

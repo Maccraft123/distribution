@@ -72,13 +72,16 @@ else
   PKG_FFMPEG_VAAPI="--disable-vaapi"
 fi
 
-if [ "${DISPLAYSERVER}" != "x11" ]; then
+if [ "${DISPLAYSERVER}" = "wl" -o "${DISPLAYSERVER}" = "weston" ]; then
   PKG_DEPENDS_TARGET+=" libdrm"
   PKG_NEED_UNPACK+=" $(get_pkg_directory libdrm)"
   PKG_FFMPEG_VAAPI=" --enable-libdrm"
+else
+  PKG_DEPENDS_TARGET+=" wayland"
+  PKG_FFMPEG_VAAPI=" --enable-wayland"
 fi
 
-if [ "${VDPAU_SUPPORT}" = "yes" -a "${DISPLAYSERVER}" = "x11" ]; then
+if [ "${VDPAU_SUPPORT}" = "yes" ]; then
   PKG_DEPENDS_TARGET+=" libvdpau"
   PKG_NEED_UNPACK+=" $(get_pkg_directory libvdpau)"
   PKG_FFMPEG_VDPAU="--enable-vdpau"

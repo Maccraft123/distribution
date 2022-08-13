@@ -70,7 +70,7 @@ perl_mod=(JSON XML::Parser)
 case "${DISTRO}" in
     fedora|centos|rhel)
       deps+=(g++ mkfontscale mkfontdir bdftopcf xsltproc java python3)
-      deps_pkg+=(gcc-c++ xorg-x11-font-utils xorg-x11-font-utils xorg-x11-font-utils libxslt java-1.7.0-openjdk python32)
+      deps_pkg+=(gcc-c++ java-1.7.0-openjdk python32)
       if [[ ! $(rpm -qa glibc-static) ]]; then
         deps+=(glibc-static)
         deps_pkg+=(glibc-static)
@@ -90,7 +90,7 @@ case "${DISTRO}" in
       ;;
     arch|manjaro)
       deps+=(g++ mkfontscale mkfontdir bdftopcf xsltproc java python3)
-      deps_pkg+=(g++ xorg-mkfontscale xorg-mkfontdir xorg-bdftopcf libxslt "java-runtime-common jdk8-openjdk" python32)
+      deps_pkg+=(g++ libxslt "java-runtime-common jdk8-openjdk" python32)
       perl_pkg=(perl-json perl-xml-parser)
       ;;
     opensuse)

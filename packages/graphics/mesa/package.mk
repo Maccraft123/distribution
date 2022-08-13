@@ -33,13 +33,9 @@ PKG_MESON_OPTS_TARGET="-Ddri-drivers= \
                        -Dselinux=false \
                        -Dosmesa=false"
 
-if [ "${DISPLAYSERVER}" = "x11" ]; then
-  PKG_DEPENDS_TARGET+=" xorgproto libXext libXdamage libXfixes libXxf86vm libxcb libX11 libxshmfence libXrandr libglvnd"
-  export X11_INCLUDES=
-  PKG_MESON_OPTS_TARGET+=" -Dplatforms=x11 -Ddri3=enabled -Dglx=dri -Dglvnd=true"
-elif [ "${DISPLAYSERVER}" = "wl" ]; then
+if [ "${DISPLAYSERVER}" = "wl" -o "${DISPLAYSERVER}" = "weston" ]; then
   PKG_DEPENDS_TARGET+=" wayland wayland-protocols libglvnd"
-  PKG_MESON_OPTS_TARGET+=" -Dplatforms=wayland -Ddri3=disabled -Dglx=disabled -Dglvnd=true"
+  PKG_MESON_OPTS_TARGET+=" -Dplatforms=wayland -Ddri3=enabled -Dglx=disabled -Dglvnd=false"
 else
   PKG_MESON_OPTS_TARGET+=" -Dplatforms="" -Ddri3=disabled -Dglx=disabled -Dglvnd=false"
 fi
@@ -51,7 +47,7 @@ else
   PKG_MESON_OPTS_TARGET+=" -Dllvm=disabled"
 fi
 
-if [ "${VDPAU_SUPPORT}" = "yes" -a "${DISPLAYSERVER}" = "x11" ]; then
+if [ "${VDPAU_SUPPORT}" = "yes" ]; then
   PKG_DEPENDS_TARGET+=" libvdpau"
   PKG_MESON_OPTS_TARGET+=" -Dgallium-vdpau=enabled"
 else

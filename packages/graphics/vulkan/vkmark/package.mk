@@ -16,10 +16,6 @@ case ${DISPLAYSERVER} in
     PKG_DEPENDS_TARGET+=" wayland wayland-protocols"
     PKG_MESON_OPTS_TARGET="-Dwayland=true"
     ;;
-  x11)
-    PKG_DEPENDS_TARGET+=" libxcb xcb-util-wm"
-    PKG_MESON_OPTS_TARGET="-Dxcb=true"
-    ;;
   *)
     PKG_DEPENDS_TARGET+=" systemd libdrm mesa"
     PKG_MESON_OPTS_TARGET="-Dkms=true"

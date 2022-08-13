@@ -12,8 +12,4 @@ PKG_DEPENDS_TARGET="toolchain SDL2 freetype"
 PKG_LONGDESC="This is a sample library which allows you to use TrueType fonts in your SDL applications"
 PACKAGE_TOOLCHAIN="autoconf"
 
-if [ ! "$DISPLAYSERVER" = "x11" ]; then
-  X11="--without-x"
-fi
-
-PKG_CONFIGURE_OPTS_TARGET="--with-freetype-prefix=$SYSROOT_PREFIX/usr $X11"
+PKG_CONFIGURE_OPTS_TARGET="--with-freetype-prefix=$SYSROOT_PREFIX/usr --without-x"

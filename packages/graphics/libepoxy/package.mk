@@ -17,6 +17,7 @@ PKG_URL="https://github.com/anholt/libepoxy/releases/download/$PKG_VERSION/$PKG_
 PKG_DEPENDS_TARGET="toolchain"
 PKG_LONGDESC="Epoxy is a library for handling OpenGL function pointer management for you."
 PKG_TOOLCHAIN="autotools"
+PKG_CONFIGURE_OPTS_TARGET="--disable-glx"
 
 if [ "$OPENGL" != "no" ]; then
   PKG_DEPENDS_TARGET+=" $OPENGL"
@@ -24,10 +25,6 @@ fi
 
 if [ "$OPENGLES" != "no" ]; then
   PKG_DEPENDS_TARGET+=" $OPENGLES"
-fi
-
-if [ "$DISPLAYSERVER" != "x11" ]; then
-  PKG_CONFIGURE_OPTS_TARGET="--disable-glx"
 fi
 
 if [ "$PROJECT" == "Amlogic" -o "$PROJECT" == "Amlogic-ng" ]; then
